@@ -1,0 +1,107 @@
+# .NET Core
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]ppPackages/
+[Bb]in/
+[Oo]bj/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directories
+.vscode/
+
+# SQL Server files
+*.mdf
+*.ldf
+
+# IIS Logs
+IISExpress/
+
+# Environment variables
+.env
+.env.*
+
+# Rider
+.idea/
+
+# Angular
+
+# compiled output
+dist/
+tmp/
+out-tsc/
+
+# dependencies
+node_modules/
+jspm_packages/
+
+# IDEs and editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+.vs/
+
+# IDE - VS Code
+.vscode/*
+
+# IDE - WebStorm
+.idea/*
+
+# IDE - Atom
+*.atom/
+.atom/packages
+*.iml
+.apm/
+.apmrc
+*.apmrc
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# local env files
+*.env
+.env.*
+
+# angular specific
+.angular/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Output files
+coverage/
