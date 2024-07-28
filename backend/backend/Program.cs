@@ -1,3 +1,6 @@
+using backend.DTOs;
+using backend.Validators;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,8 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
+    // Entity Framework
     builder.Services.AddDbContext<TodoDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("TodoConnection")));
+
+    // Validators
+    builder.Services.AddScoped<IValidator<TodoInsertDTO>, TodoInsertValidator>();
+    builder.Services.AddScoped<IValidator<TodoUpdateDTO>, TodoUpdateValidator>();
 
     builder.Services.AddCors(o => o.AddPolicy("policy", builder =>
     {

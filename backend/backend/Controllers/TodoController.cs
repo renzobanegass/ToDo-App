@@ -1,5 +1,6 @@
 ﻿using backend.DTOs;
 using backend.Models;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +12,16 @@ namespace backend.Controllers
     public class TodoController : ControllerBase
     {
         private readonly TodoDbContext _context;
+        private IValidator<TodoInsertDTO> _todoInsertValidator;
+        private IValidator<TodoUpdateDTO> _todoUpdateValidator;
 
-        public TodoController(TodoDbContext todoDbContext)
+        public TodoController(TodoDbContext todoDbContext,
+            IValidator<TodoInsertDTO> todoInsertValidator,
+            IValidator<TodoUpdateDTO> todoUpdateValidator)
         {
             _context = todoDbContext;
+            _todoInsertValidator = todoInsertValidator;
+            _todoUpdateValidator = todoUpdateValidator;
         }
 
         [HttpGet]
@@ -57,6 +64,13 @@ namespace backend.Controllers
         [HttpPost]
         public async Task<ActionResult<TodoDTO>> Create(TodoInsertDTO todoInsertDTO)
         {
+            var validationResult = await _todoInsertValidator.ValidateAsync(todoInsertDTO);
+
+            if (!validationResult.IsValid) 
+            {
+                return BadRequest(validationResult.Errors);
+            }
+
             var todo = new Todo
             {
                 Title = todoInsertDTO.Title,
@@ -85,6 +99,13 @@ namespace backend.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<TodoDTO>> Update(int id, TodoUpdateDTO todoUpdateDTO)
         {
+            var validationResult = await _todoUpdateValidator.ValidateAsync(todoUpdateDTO);
+
+            if (!validationResult.IsValid) 
+            {
+                return BadRequest(validationResult.Errors);
+            }            
+
             var todo = await _context.Todos.FindAsync(id);
 
             if (todo == null)
