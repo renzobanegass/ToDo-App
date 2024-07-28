@@ -12,7 +12,6 @@ namespace backend.Controllers
     [ApiController]
     public class TodoController : ControllerBase
     {
-        private readonly TodoDbContext _context;
         private IValidator<TodoInsertDTO> _todoInsertValidator;
         private IValidator<TodoUpdateDTO> _todoUpdateValidator;
         private ITodoService _todoService;
@@ -22,7 +21,6 @@ namespace backend.Controllers
             IValidator<TodoUpdateDTO> todoUpdateValidator,
             ITodoService todoService)
         {
-            _context = todoDbContext;
             _todoInsertValidator = todoInsertValidator;
             _todoUpdateValidator = todoUpdateValidator;
             _todoService = todoService;
