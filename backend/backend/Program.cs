@@ -1,8 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 { 
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+
+    builder.Services.AddDbContext<TodoDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("TodoConnection")));
+
     builder.Services.AddCors(o => o.AddPolicy("policy", builder =>
     {
         builder.AllowAnyOrigin()
