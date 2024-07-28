@@ -1,4 +1,6 @@
 using backend.DTOs;
+using backend.Models;
+using backend.Repository;
 using backend.Services;
 using backend.Validators;
 using FluentValidation;
@@ -12,6 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 
     //Services
     builder.Services.AddScoped<ITodoService, TodoService>();
+
+    //Repository
+    builder.Services.AddScoped<IRepository<Todo>, TodoRepository>();
 
     // Entity Framework
     builder.Services.AddDbContext<TodoDbContext>(options =>
