@@ -1,4 +1,5 @@
 using backend.DTOs;
+using backend.Services;
 using backend.Validators;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+
+    //Services
+    builder.Services.AddScoped<ITodoService, TodoService>();
 
     // Entity Framework
     builder.Services.AddDbContext<TodoDbContext>(options =>

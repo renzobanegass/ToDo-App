@@ -1,5 +1,6 @@
 ﻿using backend.DTOs;
 using backend.Models;
+using backend.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,51 +15,29 @@ namespace backend.Controllers
         private readonly TodoDbContext _context;
         private IValidator<TodoInsertDTO> _todoInsertValidator;
         private IValidator<TodoUpdateDTO> _todoUpdateValidator;
+        private ITodoService _todoService;
 
         public TodoController(TodoDbContext todoDbContext,
             IValidator<TodoInsertDTO> todoInsertValidator,
-            IValidator<TodoUpdateDTO> todoUpdateValidator)
+            IValidator<TodoUpdateDTO> todoUpdateValidator,
+            ITodoService todoService)
         {
             _context = todoDbContext;
             _todoInsertValidator = todoInsertValidator;
             _todoUpdateValidator = todoUpdateValidator;
+            _todoService = todoService;
         }
 
         [HttpGet]
         public async Task<IEnumerable<TodoDTO>> Get() =>
-            await _context.Todos.Select(t => new TodoDTO
-            {
-                Id = t.Id,
-                Title = t.Title,
-                Description= t.Description,
-                DueDate = t.DueDate,
-                IsCompleted = t.IsCompleted,
-                Created = t.Created,
-                LastUpdated = t.LastUpdated
-            }).ToListAsync();
+            await _todoService.GetAsync();
 
         [HttpGet("{id}")]
         public async Task<ActionResult<TodoDTO>> GetById(int id)
         {
-            var todo = await _context.Todos.FindAsync(id);
+            var todoDTO  = await _todoService.GetByIdAsync(id);
 
-            if (todo == null)
-            {
-                return NotFound();
-            }
-
-            var TodoDTO = new TodoDTO
-            {
-                Id = todo.Id,
-                Title = todo.Title,
-                Description = todo.Description,
-                DueDate = todo.DueDate,
-                IsCompleted = todo.IsCompleted,
-                Created = todo.Created,
-                LastUpdated = todo.LastUpdated
-            };
-
-            return Ok(TodoDTO);
+            return todoDTO == null ? NotFound() : Ok(todoDTO);
         }
 
         [HttpPost]
@@ -69,31 +48,11 @@ namespace backend.Controllers
             if (!validationResult.IsValid) 
             {
                 return BadRequest(validationResult.Errors);
-            }
+            }                        
 
-            var todo = new Todo
-            {
-                Title = todoInsertDTO.Title,
-                Description = todoInsertDTO.Description,
-                DueDate = todoInsertDTO.DueDate,
-                IsCompleted = todoInsertDTO.IsCompleted,
-                Created = DateTime.UtcNow
-            };
+            var todoDTO = await _todoService.CreateAsync(todoInsertDTO);
 
-            await _context.Todos.AddAsync(todo);
-            await _context.SaveChangesAsync();
-
-            var todoDTO = new TodoDTO
-            {
-                Id = todo.Id,
-                Title = todoInsertDTO.Title,
-                Description = todoInsertDTO.Description,
-                DueDate = todoInsertDTO.DueDate,
-                IsCompleted = todoInsertDTO.IsCompleted,
-                Created = DateTime.UtcNow                
-            };
-
-            return CreatedAtAction(nameof(GetById), new { id = todo.Id }, todoDTO);
+            return CreatedAtAction(nameof(GetById), new { id = todoDTO.Id }, todoDTO);
         }
 
         [HttpPut("{id}")]
@@ -104,50 +63,19 @@ namespace backend.Controllers
             if (!validationResult.IsValid) 
             {
                 return BadRequest(validationResult.Errors);
-            }            
+            }                                               
 
-            var todo = await _context.Todos.FindAsync(id);
+            var todoDTO = await _todoService.UpdateAsync(id, todoUpdateDTO);
 
-            if (todo == null)
-            {
-                return NotFound();
-            }
-
-            todo.Title = todoUpdateDTO.Title;
-            todo.Description = todoUpdateDTO.Description;
-            todo.DueDate = todoUpdateDTO.DueDate;
-            todo.IsCompleted = todoUpdateDTO.IsCompleted;
-            todo.LastUpdated = DateTime.UtcNow;
-
-            await _context.SaveChangesAsync();
-
-            var todoDTO = new TodoDTO
-            {
-                Id = todo.Id,
-                Title = todo.Title,
-                Description = todo.Description,
-                DueDate = todo.DueDate,
-                IsCompleted = todo.IsCompleted,
-                Created = DateTime.UtcNow
-            };
-
-            return Ok(todoDTO);
+            return todoDTO == null ? NotFound() : Ok(todoDTO);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult<TodoDTO>> Delete(int id)
         {
-            var todo = await _context.Todos.FindAsync(id);
+            var todoDTO = await _todoService.DeleteAsync(id);
 
-            if (todo == null)
-            {
-                return NotFound();
-            }
-
-            _context.Todos.Remove(todo);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return todoDTO == null ? NotFound() : Ok(todoDTO);
         }
     }
 }
