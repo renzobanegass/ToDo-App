@@ -13,20 +13,20 @@ export class TodoListingComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    
+
   }
 
   FunctionAdd(){
     this.OpenPopup(0, 'Create Todo')
   }
 
-  OpenPopup(code:number, title:string){
+  OpenPopup(id:number, title:string){
     this.dialog.open(TodoFormComponent, {
       width: '50%',
       enterAnimationDuration: '1000ms',
       exitAnimationDuration: '1000ms',
       data:{
-        code:code,
+        id:id,
         title:title
       }
     })
