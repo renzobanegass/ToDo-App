@@ -1,1 +1,29 @@
-<p>todo-form works!</p>
+<form [formGroup]="todoform" (ngSubmit)="SaveTodo()">
+<mat-card>
+    <mat-card-header>
+        <h1>{{title}}</h1>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Title</mat-label>
+            <input formControlName="title" matInput>        
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea formControlName="description" matInput></textarea>
+        </mat-form-field>
+        <mat-form-field class="mat-50" appearance="fill">
+            <mat-label>Choose a due date</mat-label>
+            <input formControlName="dueDate" matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-slide-toggle class="mat-50" formControlName="isCompleted">Is Completed?</mat-slide-toggle>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit">Create</button>
+        <button (click)="ClosePopup()" mat-raised-button color="accent">Close</button>
+    </mat-card-actions>
+</mat-card>
+</form>
