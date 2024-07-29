@@ -1,3 +1,4 @@
+using backend.Automappers;
 using backend.DTOs;
 using backend.Models;
 using backend.Repository;
@@ -25,6 +26,9 @@ var builder = WebApplication.CreateBuilder(args);
     // Validators
     builder.Services.AddScoped<IValidator<TodoInsertDTO>, TodoInsertValidator>();
     builder.Services.AddScoped<IValidator<TodoUpdateDTO>, TodoUpdateValidator>();
+
+    //Mappers
+    builder.Services.AddAutoMapper(typeof(MappingProfile));
 
     builder.Services.AddCors(o => o.AddPolicy("policy", builder =>
     {
