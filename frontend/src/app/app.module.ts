@@ -16,13 +16,16 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TodoReducer } from './store/todo/todo.reducer';
 import { TodoEffects } from './store/todo/todo.effects';
+import { AppEffects } from './store/common/app.effects';
+import { IsoDatePipe } from './iso-date.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoListingComponent,
     TodoFormComponent,
-    TodoDetailComponent
+    TodoDetailComponent,
+    IsoDatePipe
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,7 @@ import { TodoEffects } from './store/todo/todo.effects';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({todo: TodoReducer}),
-    EffectsModule.forRoot([TodoEffects]),
+    EffectsModule.forRoot([TodoEffects, AppEffects]),
     //StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
