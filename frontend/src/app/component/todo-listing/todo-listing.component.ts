@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TodoFormComponent } from '../todo-form/todo-form.component';
+import { Store } from '@ngrx/store';
+import { Todo } from 'src/app/store/model/todo.model';
+import { getTodoList } from 'src/app/store/todo/todo.selectors';
+import { loadTodo } from 'src/app/store/todo/todo.action';
 
 @Component({
   selector: 'app-todo-listing',
@@ -9,11 +13,17 @@ import { TodoFormComponent } from '../todo-form/todo-form.component';
 })
 export class TodoListingComponent implements OnInit{
 
-  constructor(private dialog: MatDialog){
+  TodoList!: Todo[];
+
+  constructor(private dialog: MatDialog, private store: Store){
 
   }
   ngOnInit(): void {
-
+    this.store.dispatch(loadTodo());
+    this.store.select(getTodoList).subscribe(item => {
+      this.TodoList = item;
+      console.log(this.TodoList);
+    });
   }
 
   FunctionAdd(){

@@ -5,5 +5,11 @@ export interface Todo{
     dueDate: Date,
     isCompleted: boolean,
     created: Date,
-    lastUpdated: Date
+    lastUpdated: Date | null
+}
+
+export interface TodoModel{
+    list:Todo[],
+    todoObj: Todo,
+    errorMessage:string
 }
