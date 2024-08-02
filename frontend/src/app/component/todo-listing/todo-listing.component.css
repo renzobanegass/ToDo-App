@@ -1,7 +1,9 @@
-.mdc-card {
+  .mdc-card {
     padding: 2%;
     box-sizing: border-box;
     min-height: 500px;
+    z-index: 1;
+    margin: 25px 0px;
   }
   
   .header-content {
@@ -13,4 +15,8 @@
   
   button {
     margin: 2px;
+  }
+
+  .table-content{
+    margin: 15px 0px;
   }
