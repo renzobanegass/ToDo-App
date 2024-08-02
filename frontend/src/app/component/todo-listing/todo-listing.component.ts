@@ -49,7 +49,7 @@ export class TodoListingComponent implements OnInit {
   }
 
   FunctionEdit(id: number) {
-    console.log('Dispatching getTodo action with id:', id); // Debugging
+    console.log('Dispatching getTodo action with id:', id); 
     this.OpenPopup(id, 'Update Todo');
     this.store.dispatch(getTodo({ id: id }));
   }

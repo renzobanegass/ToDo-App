@@ -17,8 +17,8 @@ describe('TodoFormComponent', () => {
       imports: [
         ReactiveFormsModule,
         StoreModule.forRoot({ todo: TodoReducer }),
-        BrowserAnimationsModule, // Add this
-        MaterialModule // Add this
+        BrowserAnimationsModule,
+        MaterialModule
       ],
       providers: [
         { provide: MatDialogRef, useValue: {} },

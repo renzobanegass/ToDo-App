@@ -20,8 +20,8 @@ describe('TodoListingComponent', () => {
       declarations: [ TodoListingComponent ],
       imports: [
         StoreModule.forRoot({ todo: TodoReducer }),
-        BrowserAnimationsModule, // Add this
-        MaterialModule // Add this
+        BrowserAnimationsModule,
+        MaterialModule
       ],
       providers: [
         { provide: MatDialog, useValue: dialogSpy }
