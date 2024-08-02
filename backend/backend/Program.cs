@@ -47,7 +47,11 @@ var app = builder.Build();
         app.UseSwaggerUI();
     }
 
-    app.UseHttpsRedirection();
+    if (!app.Environment.IsEnvironment("Testing"))
+    {
+        app.UseHttpsRedirection();
+    }
+
     app.UseCors("policy");
     app.UseAuthorization();
 
@@ -55,3 +59,5 @@ var app = builder.Build();
 
     app.Run();
 }
+
+public partial class Program { }
