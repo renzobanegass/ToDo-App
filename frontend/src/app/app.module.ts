@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TodoListingComponent } from './component/todo-listing/todo-listing.component';
 import { TodoFormComponent } from './component/todo-form/todo-form.component';
-import { TodoDetailComponent } from './component/todo-detail/todo-detail.component';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http'
 import { ReactiveFormsModule } from '@angular/forms';
@@ -24,7 +23,6 @@ import { IsoDatePipe } from './iso-date.pipe';
     AppComponent,
     TodoListingComponent,
     TodoFormComponent,
-    TodoDetailComponent,
     IsoDatePipe
   ],
   imports: [
