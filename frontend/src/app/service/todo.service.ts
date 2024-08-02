@@ -11,11 +11,12 @@ export class TodoService {
 
    }
 
-   GetAll() {
+   GetAll() {      
       return this.http.get<Todo[]>(this.baseUrl);
    }
 
    GetById(id: number) {
+      console.log(id);
       return this.http.get<Todo>(this.baseUrl +'/'+ id);
    }
 
@@ -28,6 +29,6 @@ export class TodoService {
    }
 
    Delete(id: number) {
-      return this.http.delete(this.baseUrl +''+ id);
+      return this.http.delete(this.baseUrl +'/'+ id);
    }
 }

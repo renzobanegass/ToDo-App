@@ -1,5 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
-import { addTodoSuccess, loadTodoFail, loadTodoSuccess } from './todo.action';
+import {
+  addTodoSuccess,
+  deleteTodoSuccess,
+  getTodoSuccess,
+  loadTodoFail,
+  loadTodoSuccess,
+  openPopup,
+  updateTodoSuccess,
+} from './todo.action';
 import { TodoState } from './todo.state';
 
 const _TodoReducer = createReducer(
@@ -8,6 +16,13 @@ const _TodoReducer = createReducer(
     return {
       ...state,
       list: [...action.list],
+      errorMessage: '',
+    };
+  }),
+  on(getTodoSuccess, (state, action) => {
+    return {
+      ...state,
+      todoObj: action.obj,
       errorMessage: '',
     };
   }),
@@ -26,6 +41,38 @@ const _TodoReducer = createReducer(
       ...state,
       list: [...state.list, _newData],
       errorMessage: '',
+    };
+  }),
+  on(updateTodoSuccess, (state, action) => {
+    const _newData = state.list.map((o) => {
+      return o.id === action.inputData.id ? action.inputData : o;
+    })    
+    return {
+      ...state,
+      list: _newData,
+      errorMessage: '',
+    };
+  }),
+  on(deleteTodoSuccess, (state, action) => {
+    const _newData = state.list.filter(o=>o.id !== action.id)
+    return {
+      ...state,
+      list: _newData,
+      errorMessage: '',
+    };
+  }),
+  on(openPopup, (state, action) => {
+    return {
+      ...state,
+      todoObj: {
+        id: 0,
+        title: '',
+        description: '',
+        dueDate: new Date(0),
+        isCompleted: false,
+        created: new Date(0),
+        lastUpdated: null,
+      },
     };
   })
 );

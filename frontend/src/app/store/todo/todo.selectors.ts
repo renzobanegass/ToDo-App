@@ -6,3 +6,7 @@ const getTodoState = createFeatureSelector<TodoModel>('todo')
 export const getTodoList = createSelector(getTodoState, (state) => {
     return state.list;
 })
+
+export const getTodo = createSelector(getTodoState, (state) => {
+    return state.todoObj;
+})
