@@ -11,8 +11,8 @@ Este es un proyecto de una aplicación de ToDo construida con .NET Core 7 y Angu
 
 ## Descripción
 
-ToDo-App es una aplicación simple para gestionar tareas. Actualmente, la aplicación no incluye funcionalidades de búsqueda y filtro ni autenticación de usuario. Además, la aplicación no utiliza borrado lógico ni genéricos debido al alcance de la misma.
-Aún no está terminada, falta:
+ToDo-App es una aplicación simple para gestionar tareas. La aplicación no utiliza borrado lógico ni genéricos debido al alcance de la misma.
+Aún no está terminada, aún falta:
 - Autenticación de usuarios
 - Búsqueda y filtros
 - Correciones de estilos
