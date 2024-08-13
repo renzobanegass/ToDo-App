@@ -1,92 +1,92 @@
 # ToDo-App
 
-Este es un proyecto de una aplicación de ToDo construida con .NET Core 7 y Angular 16.
+This is a ToDo application project built with .NET Core 7 and Angular 16.
 
-## Tabla de Contenidos
+## Table of Contents
 
-- [Descripción](#descripción)
-- [Instalación](#instalación)
-- [Uso](#uso)
-- [Convenciones de Commits](#convenciones-de-commits)
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Commit Conventions](#commit-conventions)
 
-## Descripción
+## Description
 
-ToDo-App es una aplicación simple para gestionar tareas. La aplicación no utiliza borrado lógico ni genéricos debido al alcance de la misma.
-Aún no está terminada, aún falta:
-- Autenticación de usuarios
-- Búsqueda y filtros
-- Correciones de estilos
+ToDo-App is a simple application for managing tasks. The application does not use soft deletes or generics due to its scope.
+It is not yet complete and still missing:
+- User authentication
+- Search and filters
+- Style corrections
 
-## Instalación
+## Installation
 
-Para poner en marcha el proyecto localmente, sigue estos pasos:
+To get the project up and running locally, follow these steps:
 
-1. Clona el repositorio:
+1. Clone the repository:
 
     ```bash
     git clone https://github.com/renzobanegass/ToDo-App.git
     cd ToDo-App
     ```
 
-2. Configura la API:
+2. Set up the API:
 
-    - Navega a la carpeta de la API:
+    - Navigate to the API folder:
 
       ```bash
       cd ToDoApp.Api
       ```
 
-    - Restaura las dependencias y actualiza la base de datos con las últimas migraciones:
+    - Restore dependencies and update the database with the latest migrations:
 
       ```bash
       dotnet restore
       dotnet ef database update
       ```
 
-3. Configura el frontend:
+3. Set up the frontend:
 
-    - Navega a la carpeta del frontend:
+    - Navigate to the frontend folder:
 
       ```bash
       cd ../ToDoApp.Client
       ```
 
-    - Instala las dependencias:
+    - Install the dependencies:
 
       ```bash
       npm install
       ```
 
-4. Ejecuta la aplicación:
+4. Run the application:
 
-    - Para iniciar la API:
+    - To start the API:
 
       ```bash
       cd ../ToDoApp.Api
       dotnet run
       ```
 
-    - Para iniciar el frontend:
+    - To start the frontend:
 
       ```bash
       cd ../ToDoApp.Client
       ng serve
       ```
 
-    La aplicación estará disponible en `http://localhost:4200`.
+    The application will be available at `http://localhost:4200`.
 
-## Uso
+## Usage
 
-Una vez que la aplicación esté en funcionamiento, podrás gestionar tus tareas, crear nuevas, editarlas y eliminarlas.
+Once the application is running, you can manage your tasks, create new ones, edit them, and delete them.
 
-## Convenciones de Commits
+## Commit Conventions
 
-Este proyecto utiliza convenciones de commits para mantener un historial de cambios claro y estructurado. A partir del refactor de la API, se implementaron las siguientes convenciones:
+This project uses commit conventions to maintain a clear and structured change history. Starting from the API refactor, the following conventions were implemented:
 
-- `feat`: Una nueva característica
-- `fix`: Una corrección de bug
-- `docs`: Cambios en la documentación
-- `style`: Cambios que no afectan el significado del código (espacios en blanco, formato, etc.)
-- `refactor`: Cambios en el código que no corrigen errores ni añaden características
-- `test`: Añadir pruebas o corregir las existentes
-- `chore`: Actualizaciones de tareas de construcción, configuración de administrador de paquetes, etc.
+- `feat`: A new feature
+- `fix`: A bug fix
+- `docs`: Documentation changes
+- `style`: Changes that do not affect the meaning of the code (whitespace, formatting, etc.)
+- `refactor`: Code changes that neither fix bugs nor add features
+- `test`: Adding or correcting tests
+- `chore`: Updates to build tasks, package manager configurations, etc.
